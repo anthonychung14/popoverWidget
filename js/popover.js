@@ -41,7 +41,7 @@ function parseId(e) {
 //AJAX to DB. Mocked with a small data struct as proof of concept
 function getMiniProfile(id, e) {
   var profileData = cache[id] ? cache[id] : id    
-  if (!cache[id]) { cache[id] = id }  
+  if (!cache[id]) { cache[id] = id + "    : retrieved from the cache"}  
   generatePopOver(profileData, e)
 }
 
@@ -49,7 +49,7 @@ function getMiniProfile(id, e) {
 function generatePopOver(id, e) {
   var popOver = document.createElement('div')
   popOver.id = 'popContainer'      
-  popOver.innerHTML = popOver.innerHTML + id + ":   This is a popover"  
+  popOver.innerHTML = popOver.innerHTML + id
   var linkPosition = getPosition(e.target)
   var linkPositionY = linkPosition.y - (linkPosition.y/4)
   var linkPositionX = linkPosition.x + linkPosition.x

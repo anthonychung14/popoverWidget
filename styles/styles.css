@@ -30,8 +30,16 @@
 
   .profileInfo {        
     width: 100%;
-    height: 100%;    
+    height: 100%;                
     background-color: white;
+  }
+
+  .profileName {
+    padding: 3%;    
+  }
+
+  .profileDetail {
+    padding: 3%;
   }
 
   .connections {
@@ -45,7 +53,8 @@
 
   #popContainer {
     height: 100px;
-    width: 250px;    
+    width: 250px;
+    padding: 3%;    
     position: absolute;        
     background-color: #0077B5;    
     z-index: 1;
