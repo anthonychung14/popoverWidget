@@ -1,0 +1,39 @@
+  body { font-family: “arial black”; }
+  h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+    font-style: normal;
+  }
+  ul, li { 
+    list-style: none;    
+  }
+
+  h3 {
+    font-size: 1em;
+  }
+  
+  .profileCard {      
+    position: relative;
+    width: 320px;
+    height: 140px;
+    border: 1px solid grey;
+    background-color: lightgrey;
+    overflow: auto;    
+    margin: auto;
+    margin-top: 4%;
+  }
+
+  .occasion {    
+    float: right;
+    width: 65%;
+    height: 75%;
+    background-color: white;        
+  }
+
+  .connections {
+    background-color: beige;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25%;
+  }
