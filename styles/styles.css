@@ -52,8 +52,8 @@
   }
 
   #popContainer {
-    height: 100px;
-    width: 250px;
+    height: 75px;
+    width: 150px;
     padding: 3%;    
     position: absolute;        
     background-color: #0077B5;    
