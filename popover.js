@@ -5,8 +5,11 @@ feed.addEventListener("mouseout", cancelTime)
 //global timeOutId to control hover state
 var timeoutId = null
 
+//ideally this would be stored in a separate caching service
+//Redis comes to mind as a k-v store for this
 var cache = {}
 
+//on mouseout, reset timer and remove element
 function cancelTime() {
   window.clearTimeout(timeoutId)
   var popUp;
@@ -17,12 +20,14 @@ function cancelTime() {
   }
 }
 
+//setTimeout for hover
 function decideHover(e) {
   timeoutId = window.setTimeout(function() {
     parseId(e);
   }, 500);  
 }
 
+//library function parseId from href
 function parseId(e) {  
   var target = e.target  
   var id, path;
@@ -33,38 +38,23 @@ function parseId(e) {
   }  
 }
 
+//AJAX to DB. Mocked with a small data struct as proof of concept
 function getMiniProfile(id, e) {
-  // var request = new XMLHttpRequest();
-  // request.open('GET', '/', true);
-  // request.onload = function() {
-  //   if (request.status >=200 && request.status < 400) {
-  //     console.log(request)
-  //   } else {
-  //     console.log("I TRIEDD")
-  //   }
-  // }
-
-  // request.responseType = 'json';
-  // request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-  // request.setRequestHeader('popoverAJAX', '1.0');
-  // request.send();
-  var profileData;
-  if(cache[id]) {
-    profileData = cache[id]
-  } else {
-    profileData = id
-  }
+  var profileData = cache[id] ? cache[id] : id    
+  if (!cache[id]) { cache[id] = id }  
   generatePopOver(profileData, e)
+}
 
+//Generates popover
 function generatePopOver(id, e) {
   var popOver = document.createElement('div')
   popOver.id = 'popContainer'      
   popOver.innerHTML = popOver.innerHTML + id + ":   This is a popover"  
   var linkPosition = getPosition(e.target)
-  var linkPositionY = linkPosition.y - 200
+  var linkPositionY = -linkPosition.y + -linkPosition.y
+  var linkPositionX = -linkPosition.x + -linkPosition.x
   
-  popOver.style.top = linkPosition.y+'px'
-  var linkPositionX = linkPosition.x + linkPosition.x
+  popOver.style.top = linkPositionY+'px'
 
   popOver.style.left = linkPositionX+'px'
 
@@ -73,40 +63,6 @@ function generatePopOver(id, e) {
 }
 
 
-// deal with the page getting resized or scrolled
-window.addEventListener("scroll", updatePosition, false);
-window.addEventListener("resize", updatePosition, false);
- 
-function updatePosition() {
-  // add your code to update the position when your browser
-  // is resized or scrolled
-}
-
-function getPosition(el) {
-  var xPos = 0;
-  var yPos = 0;
- 
-  while (el) {
-    if (el.tagName == "BODY") {
-      // deal with browser quirks with body/window/document and page scroll
-      var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
-      var yScroll = el.scrollTop || document.documentElement.scrollTop;
- 
-      xPos += (el.offsetLeft - xScroll + el.clientLeft);
-      yPos += (el.offsetTop - yScroll + el.clientTop);
-    } else {
-      // for all other non-BODY elements
-      xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
-      yPos += (el.offsetTop - el.scrollTop + el.clientTop);
-    }
- 
-    el = el.offsetParent;
-  }
-  return {
-    x: xPos,
-    y: yPos
-  };
-}
  
 
 
