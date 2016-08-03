@@ -1,16 +1,7 @@
-var http = require('http'),
-    filed = require('filed');
+var express = require('express');
+var compress = require('compress');
+var app = express();
 
-server = http.createServer(function(req, resp){
-  if(req.url === "/"){
-    req.pipe(filed('./index.html')).pipe(resp);
-  }else{
-    req.pipe(filed("./" + req.url)).pipe(resp);
-  }
-});
+app.use(express.static(__dirname + '/'));
 
-var port = process.argv[2] || 3000
-
-server.listen(port, function(){
-  console.log("Server started on " + port);
-});
+app.listen(process.env.PORT || 3000);

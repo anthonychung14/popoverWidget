@@ -12,6 +12,8 @@
     "email": "anthonychung14@gmail.com"
   },
   "dependencies": {
+    "compress": "^0.99.0",
+    "express": "^4.14.0",
     "filed": "^0.1.0"
   }
 }

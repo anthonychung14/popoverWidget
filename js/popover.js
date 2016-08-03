@@ -51,8 +51,8 @@ function generatePopOver(id, e) {
   popOver.id = 'popContainer'      
   popOver.innerHTML = popOver.innerHTML + id + ":   This is a popover"  
   var linkPosition = getPosition(e.target)
-  var linkPositionY = -linkPosition.y + -linkPosition.y
-  var linkPositionX = -linkPosition.x + -linkPosition.x
+  var linkPositionY = linkPosition.y - (linkPosition.y/4)
+  var linkPositionX = linkPosition.x + linkPosition.x
   
   popOver.style.top = linkPositionY+'px'
 
